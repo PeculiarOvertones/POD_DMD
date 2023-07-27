@@ -1,0 +1,217 @@
+#!MC 1410
+$!VarSet |LFDSFN1| = '"UnitCircle.dat"'
+$!VarSet |LFDSVL1| = '"V1" "V2"'
+$!VarSet |LFDSFN2| = '"EigenValues_DMD.dat"'
+$!VarSet |LFDSVL2| = '"V1" "V2" "V3" "V4" "V5" "V6"'
+$!SetStyleBase Factory
+$!GlobalPaper 
+  PaperSizeInfo
+    {
+    Letter
+      {
+      Width = 8.5
+      Height = 11
+      LeftHardClipOffset = 0.125
+      RightHardClipOffset = 0.125
+      TopHardClipOffset = 0.125
+      BottomHardClipOffset = 0.125
+      }
+    }
+$!Page 
+  Name = 'Untitled'
+  PaperAttributes
+    {
+    BackgroundColor = White
+    IsTransparent = Yes
+    OrientPortrait = No
+    ShowGrid = Yes
+    ShowRuler = No
+    ShowPaper = No
+    PaperSize = Letter
+    RulerSpacing = OneInch
+    PaperGridSpacing = HalfInch
+    RegionInWorkArea
+      {
+      X1 = 1
+      Y1 = 0.25
+      X2 = 10
+      Y2 = 8.25
+      }
+    }
+### Frame Number 1 ###
+$!ReadDataSet  '|LFDSFN1|'
+  InitialPlotType = XYLine
+  IncludeText = No
+  IncludeGeom = No
+  AssignStrandIDs = Yes
+  VarLoadMode = ByName
+  VarNameList = '|LFDSVL1|'
+$!RemoveVar |LFDSVL1|
+$!RemoveVar |LFDSFN1|
+$!ReadDataSet  '|LFDSFN2|'
+  InitialPlotType = XYLine
+  IncludeText = No
+  IncludeGeom = No
+  ReadDataOption = Append
+  ResetStyle = No
+  AssignStrandIDs = Yes
+  VarLoadMode = ByName
+  VarNameList = '|LFDSVL2|'
+$!RemoveVar |LFDSVL2|
+$!RemoveVar |LFDSFN2|
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 9
+  Height = 8
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!PlotType  = XYLine
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [1-2]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    XYPos
+      {
+      X = 95
+      }
+    }
+$!LineMap  [1]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 2
+    }
+  Lines
+    {
+    Color = Black
+    LinePattern = Dashed
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Show = No
+    Color = Red
+    FillColor = Red
+    Size = 1.5
+    LineThickness = 0.8
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [2]
+  Name = 'Map 1'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 2
+    }
+  Lines
+    {
+    Show = No
+    Color = Green
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    SymbolShape
+      {
+      GeomShape = Circle
+      }
+    Color = Red
+    FillColor = Green
+    Size = 1.5
+    LineThickness = 0.8
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  ViewportPosition
+    {
+    X1 = 13.148
+    Y1 = 11.167
+    X2 = 93.045
+    Y2 = 94.177
+    }
+  ViewportTopSnapTarget = 94.1769616027
+$!XYLineAxis 
+  XDetail 1
+    {
+    RangeMin = -1
+    RangeMax = 1.000199999999999978
+    GRSpacing = 0.5
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'Re(<greek>l</greek>)'
+      TextShape
+        {
+        Height = 4
+        }
+      Offset = 6
+      }
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    RangeMin = -1
+    RangeMax = 1.000199999999999978
+    GRSpacing = 0.5
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'Im(<greek>l</greek>)'
+      Offset = 8
+      }
+    }
+$!LinePlotLayers 
+  ShowSymbols = Yes
+$!FrameControl ActivateByNumber
+  Frame = 1
+$!SetStyleBase Config

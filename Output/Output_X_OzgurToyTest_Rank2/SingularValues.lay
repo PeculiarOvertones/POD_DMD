@@ -1,0 +1,216 @@
+#!MC 1410
+$!VarSet |LFDSFN1| = '"SingularValues_POD.dat"'
+$!VarSet |LFDSVL1| = '"V1" "V2"'
+$!SetStyleBase Factory
+$!GlobalPaper 
+  PaperSizeInfo
+    {
+    Letter
+      {
+      Width = 8.5
+      Height = 11
+      LeftHardClipOffset = 0.125
+      RightHardClipOffset = 0.125
+      TopHardClipOffset = 0.125
+      BottomHardClipOffset = 0.125
+      }
+    }
+$!Page 
+  Name = 'Untitled'
+  PaperAttributes
+    {
+    BackgroundColor = White
+    IsTransparent = Yes
+    OrientPortrait = No
+    ShowGrid = Yes
+    ShowRuler = No
+    ShowPaper = No
+    PaperSize = Letter
+    RulerSpacing = OneInch
+    PaperGridSpacing = HalfInch
+    RegionInWorkArea
+      {
+      X1 = 1
+      Y1 = 0.25
+      X2 = 10
+      Y2 = 8.25
+      }
+    }
+### Frame Number 1 ###
+$!ReadDataSet  '|LFDSFN1|'
+  InitialPlotType = XYLine
+  IncludeText = No
+  IncludeGeom = No
+  AssignStrandIDs = Yes
+  VarLoadMode = ByName
+  VarNameList = '|LFDSVL1|'
+$!RemoveVar |LFDSVL1|
+$!RemoveVar |LFDSFN1|
+$!AlterData 
+  Equation = '{Mode}=i'
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 9
+  Height = 8
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!PlotType  = XYLine
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [1]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    XYPos
+      {
+      X = 95
+      }
+    }
+$!LineMap  [1]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 3
+    YAxisVar = 1
+    }
+  Lines
+    {
+    Color = Red
+    }
+  Symbols
+    {
+    SymbolShape
+      {
+      GeomShape = Circle
+      }
+    Color = Red
+    FillColor = Red
+    Size = 1
+    LineThickness = 0.4
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  ViewportPosition
+    {
+    X1 = 12.443
+    Y1 = 10.165
+    X2 = 93.289
+    Y2 = 95.68
+    }
+  ViewportTopSnapTarget = 95.6804056912
+$!XYLineAxis 
+  XDetail 1
+    {
+    RangeMin = -2.0810674737017458291
+    RangeMax = 41.918932526298249286
+    GRSpacing = 10
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      Offset = 6
+      }
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    CoordScale = Log
+    RangeMin = 412857.98959629610181
+    RangeMax = 133437482.26052387059
+    GRSpacing = 20000000
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'Singular Values'
+      TextShape
+        {
+        Height = 4
+        }
+      Offset = 8
+      }
+    }
+$!LinePlotLayers 
+  ShowLines = No
+  ShowSymbols = Yes
+$!AttachText 
+  AnchorPos
+    {
+    X = 29.38247810372885
+    Y = 82.31551542062104
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  Text = 'Highest energy (~98.5%)\nin the first mode'
+$!AttachGeom 
+  AnchorPos
+    {
+    X = 1.600772235442474
+    Y = 0.9883920396641758
+    }
+  LineThickness = 0.4
+  ArrowheadAttachment = AtEnd
+  ArrowheadSize = 3
+  RawData
+1
+2
+4.0774679184 1.12326348223E-09 
+2.7798826352E-08 1.12326348223E-09 
+$!AttachGeom 
+  AnchorPos
+    {
+    X = 1.68451261072185
+    Y = 77063587.17395386
+    }
+  LineThickness = 0.4
+  ArrowheadAttachment = AtEnd
+  ArrowheadSize = 3
+  RawData
+1
+2
+4.49434185028 0.498201310635 
+5.80233283642E-08 0.498201310635 
+$!FrameControl ActivateByNumber
+  Frame = 1
+$!SetStyleBase Config

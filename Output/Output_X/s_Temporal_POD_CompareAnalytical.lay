@@ -1,0 +1,302 @@
+#!MC 1410
+$!VarSet |LFDSFN1| = '"s_TemporalModes_POD.dat"'
+$!VarSet |LFDSVL1| = '"V1" "V2" "V3" "V4" "V5"'
+$!VarSet |LFDSFN2| = '"AnalyticalTemporalModesOzgurTest.dat"'
+$!VarSet |LFDSVL2| = '"V1";"y" "V2";"at1" "V3";"at2" "V4" "V5"'
+$!SetStyleBase Factory
+$!GlobalPaper 
+  PaperSizeInfo
+    {
+    Letter
+      {
+      Width = 8.5
+      Height = 11
+      LeftHardClipOffset = 0.125
+      RightHardClipOffset = 0.125
+      TopHardClipOffset = 0.125
+      BottomHardClipOffset = 0.125
+      }
+    }
+$!Page 
+  Name = 'Untitled'
+  PaperAttributes
+    {
+    BackgroundColor = White
+    IsTransparent = Yes
+    OrientPortrait = No
+    ShowGrid = Yes
+    ShowRuler = No
+    ShowPaper = No
+    PaperSize = Letter
+    RulerSpacing = OneInch
+    PaperGridSpacing = HalfInch
+    RegionInWorkArea
+      {
+      X1 = 1
+      Y1 = 0.25
+      X2 = 10
+      Y2 = 8.25
+      }
+    }
+### Frame Number 1 ###
+$!ReadDataSet  '|LFDSFN1|'
+  InitialPlotType = XYLine
+  IncludeText = No
+  IncludeGeom = No
+  AssignStrandIDs = Yes
+  VarLoadMode = ByName
+  VarNameList = '|LFDSVL1|'
+$!RemoveVar |LFDSVL1|
+$!RemoveVar |LFDSFN1|
+$!AlterData 
+  Equation = 'V1=V1*0.100503'
+$!AlterData 
+  Equation = 'V2=V2/2'
+$!AlterData 
+  Equation = 'V3=V3/2'
+$!ReadDataSet  '|LFDSFN2|'
+  InitialPlotType = XYLine
+  IncludeText = No
+  IncludeGeom = No
+  ReadDataOption = Append
+  ResetStyle = No
+  AssignStrandIDs = Yes
+  VarLoadMode = ByName
+  VarNameList = '|LFDSVL2|'
+$!RemoveVar |LFDSVL2|
+$!RemoveVar |LFDSFN2|
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 9
+  Height = 8
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!PlotType  = XYLine
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [3-4]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    Show = Yes
+    TextShape
+      {
+      Height = 5
+      }
+    Box
+      {
+      BoxType = None
+      }
+    XYPos
+      {
+      X = 96.32
+      Y = 100
+      }
+    }
+$!LineMap  [1]
+  Name = 'a<sub>1</sub>'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 2
+    }
+  Lines
+    {
+    Color = Green
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Green
+    FillColor = Red
+    Size = 1.5
+    LineThickness = 0.4
+    SkipMode = ByFrameUnits
+    Skipping = 3
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [2]
+  Name = 'a<sub>2</sub>'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 3
+    }
+  Lines
+    {
+    Color = Custom38
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    SymbolShape
+      {
+      GeomShape = Grad
+      }
+    Color = Custom38
+    FillColor = Green
+    Size = 1.5
+    LineThickness = 0.4
+    SkipMode = ByFrameUnits
+    Skipping = 3
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!LineMap  [3]
+  Name = 'Analytical a<sub>1</sub>'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 2
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Black
+    FillColor = Blue
+    Size = 1.5
+    LineThickness = 0.4
+    SkipMode = ByFrameUnits
+    Skipping = 3
+    }
+  BarCharts
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  ErrorBars
+    {
+    Color = Blue
+    }
+$!LineMap  [4]
+  Name = 'Analytical a<sub>2</sub>'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 3
+    }
+  Lines
+    {
+    Color = Red
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    SymbolShape
+      {
+      GeomShape = Grad
+      }
+    Color = Red
+    FillColor = Custom1
+    Size = 1.5
+    LineThickness = 0.4
+    SkipMode = ByFrameUnits
+    Skipping = 3
+    }
+  BarCharts
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Color = Custom1
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  ViewportPosition
+    {
+    X1 = 14.604
+    Y1 = 11.425
+    X2 = 92.246
+    Y2 = 93.626
+    }
+  ViewportTopSnapTarget = 93.6263269639
+$!XYLineAxis 
+  XDetail 1
+    {
+    RangeMin = 0.024306915793351077659
+    RangeMax = 20.024306915793353312
+    GRSpacing = 5
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 't/(rad)'
+      Offset = 6
+      }
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    RangeMin = -2.5
+    RangeMax = 3.5
+    AutoGrid = No
+    GRSpacing = 2
+    GRAnchor = 2
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'a1, a2'
+      TextShape
+        {
+        Height = 4
+        }
+      Offset = 10
+      }
+    }
+$!LinePlotLayers 
+  ShowSymbols = Yes
+$!FrameControl ActivateByNumber
+  Frame = 1
+$!SetStyleBase Config
