@@ -1,0 +1,66 @@
+#!/bin/bash
+### set the number of nodes
+### set the number of PEs per node
+#PBS -l nodes=50:ppn=3:xe
+### set the wallclock time
+#PBS -l walltime=00:30:00
+### set the job name
+#PBS -N POD
+### set the job stdout and stderr
+#PBS -e $PBS_JOBID.err
+#PBS -o $PBS_JOBID.out
+### set email notification
+#PBS -m bea
+#PBS -M sssawan2@illinois.edu 
+### In case of multiple allocations, select which one to charge
+#PBS -A bape 
+### PBS -q debug 
+#PBS -q normal
+
+# NOTE: lines that begin with "#PBS" are not interpreted by the shell but ARE
+# used by the batch system, wheras lines that begin with multiple # signs,
+# like "##PBS" are considered "commented out" by the batch system
+# and have no effect.
+
+# If you launched the job in a directory prepared for the job to run within,
+# you'll want to cd to that directory
+# [uncomment the following line to enable this]
+cd $PBS_O_WORKDIR
+
+echo Hostname: `hostname`
+echo Date: `date`
+echo Directory: `pwd`
+echo Processor List:
+echo `cat $PBS_NODEFILE`
+
+# Alternatively, the job script can create its own job-ID-unique directory
+# to run within.  In that case you'll need to create and populate that
+# directory with executables and perhaps inputs
+# [uncomment and customize the following lines to enable this behavior]
+#mkdir -p /scratch/sciteam/$USER/$PBS_JOBID
+#cd /scratch/sciteam/$USER/$PBS_JOBID
+#cp /scratch/job/setup/directory/* .
+
+# To add certain modules that you do not have added via ~/.modules
+. /opt/modules/default/init/bash # NEEDED to add module commands to shell
+#module load craype-hugepages2M  perftools
+
+# export APRUN_XFER_LIMITS=1  # to transfer shell limits to the executable
+#module unload darshan
+#export ATP_ENABLED=0
+export MPICH_MEMORY_REPORT=3
+export MPICH_RANK_REORDER_DISPLAY=1
+export ATP_ENABLED=1
+ulimit -c unlimited
+## launch the application
+### redirecting stdin and stdout if needed
+### NOTE: (the "in" file must exist for input)
+
+### aprun -n 65536 ./app.exe  < in > out.$PBS_JOBID
+aprun -N 3 -n 150 ./solver.x > out.$PBS_JOBID
+#aprun -N 16 -n 20000  ./maestro.x > out.$PBS_JOBID
+### aprun -n 1 -N 1 -cc 0 ./maestro.x > out.$PBS_JOBID : -n 19999 -N 25 ./maestro.x > out.$PBS_JOBID
+### prun -N 16 -n $PBS_NP ./maestro.x > out.$PBS_JOBID
+### ddt -offline myfile.html -noqueue -n  $PBS_NP ./maestro.x  > out.$PBS_JOBID
+
+### For more information see the man page for aprun

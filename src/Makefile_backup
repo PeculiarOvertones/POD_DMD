@@ -1,0 +1,45 @@
+CC=mpicxx
+CFLAGS=--std=c++11 
+COMPFLAGS=
+GFLAGS=
+
+all: solver.x Makefile
+	rm -rf *.o
+
+LIBLINK=-llapacke -llapack -lblas -lgfortran -lm
+
+maestro.x: common.o processor.o other.o matrix.o nvector.o ops.o qr_decomposition.o svd.o main.o Makefile
+	$(CC) $(LIBLINK) $(GFLAGS) common.o processor.o other.o matrix.o nvector.o ops.o qr_decomposition.o svd.o main.o -o maestro.x 
+
+common.o: common.hpp Makefile
+	$(CC) $(COMPFLAGS) $(CFLAGS) common.cpp
+
+processor.o: lagrangian/def_particle.cpp Makefile
+	$(CC) $(COMPFLAGS) $(CFLAGS) lagrangian/def_particle.cpp
+
+other.o: geometry/def_algorithm.cpp Makefile
+	$(CC) $(COMPFLAGS) $(CFLAGS) geometry/def_algorithm.cpp
+
+matrix.o: geometry/def_cutcell.cpp Makefile
+	$(CC) $(COMPFLAGS) $(CFLAGS) geometry/def_cutcell.cpp
+
+nvector.o: geometry/def_cell.cpp Makefile
+	$(CC) $(COMPFLAGS) $(CFLAGS) geometry/def_cell.cpp
+
+ops.o: geometry/def_grid.cpp Makefile
+	$(CC) $(COMPFLAGS) $(CFLAGS) geometry/def_grid.cpp
+
+qr_decomposition.o: geometry/def_surface.cpp Makefile
+	$(CC) $(COMPFLAGS) $(CFLAGS) geometry/def_surface.cpp
+
+svd.o: communication/def_processor.cpp Makefile
+	$(CC) $(COMPFLAGS) $(CFLAGS) communication/def_processor.cpp
+
+main.o: main.cpp Makefile
+	$(CC) $(COMPFLAGS) $(CFLAGS) comm.cpp
+
+clean:
+	rm -rf *.o
+
+veryclean:
+	rm -rf *.o *.x
